@@ -1,0 +1,24 @@
+1. Why is MVVM important? Which files represent Model, which files represent View, and which files represent ViewModel?
+ANSWER: 
+MVVM penting karena memungkinkan suatu project untuk dapat memisahkan UI (antarmuka pengguna) dan logika bisnis. 
+Model > Movie.kt (Entitas data) dan package database (MovieDao.kt, MovieDatabase.kt).
+View > File XML layout (activity_main.xml) dan Activity/Fragment (MainActivity.kt).
+ViewModel > MovieViewModel.kt.
+
+2. In Part 1, you implemented Data Binding, why is this more efficient than using the normal method?
+ANSWER: 
+Data Binding lebih efisien karena memungkinkan ViewModel Anda berkomunikasi langsung dengan View. Dengan Data Binding, kita dapat langsung mengikat (bind) data (seperti LiveData atau StateFlow) dari ViewModel ke elemen UI, seperti mengikat popularMovies ke RecyclerView menggunakan app:list="@{viewModel.popularMovies}".
+
+3. In Part 2, you implemented the Singleton Pattern, why is this important?
+ANSWER: 
+Pola Singleton diimplementasikan untuk deklarasi Database(di MovieDatabase.kt) dan sangat penting karena untuk emastikan bahwa hanya ada 1 single instance dari Database di seluruh thread, membuat instance baru dari Database adalah operasi yang mahal, dan memastikan validitas data dan mencegah Race Conditions. 
+
+4. In Part 2 & 3, you implemented the Repository Pattern, why is this important?
+ANSWER: 
+Pola Repository adalah pola desain yang penting karena menyediakan sinkronisasi data aplikasi antara layanan web (API) dan basis data lokal Anda (Room), memastikan bahwa data di basis data lokal Anda akan selalu mutakhir dengan data di layanan web, dan memungkinkan pengguna untuk mengakses aplikasi bahkan ketika tidak ada koneksi di area tersebut (karena data di-cache).
+
+5. In part 3, you implemented the Worker Manager, is there another way to refresh your database with the latest data other than using Worker?
+ANSWER: 
+> Pembaruan Berdasarkan Tindakan Pengguna (Misalnya, Pull-to-Refresh): Pengguna secara manual memicu penarikan data (refresh) saat mereka berinteraksi dengan UI (misalnya, menggesek ke bawah pada daftar).
+> Menggunakan Foreground Service: Untuk tugas-tugas berulang yang harus dijamin berjalan dan penting bagi pengguna, meskipun WorkManager lebih disukai untuk tugas latar belakang yang dapat ditunda (deferrable).
+> Pesan Data FCM (Firebase Cloud Messaging): Server backend dapat mengirim pesan data (silent push notification) ke aplikasi untuk memberi tahu bahwa ada data baru yang tersedia, yang kemudian memicu logika refresh data.
