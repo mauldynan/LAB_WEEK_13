@@ -5,11 +5,11 @@ plugins {
 }
 
 android {
-    namespace = "com.example.test_lab_week_12"
+    namespace = "com.example.test_lab_week_13"
     compileSdk = 36
 
     defaultConfig {
-        applicationId = "com.example.test_lab_week_12"
+        applicationId = "com.example.test_lab_week_13"
         minSdk = 24
         targetSdk = 36
         versionCode = 1
@@ -27,6 +27,9 @@ android {
             )
         }
     }
+    buildFeatures {
+        dataBinding = true
+    }
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_11
         targetCompatibility = JavaVersion.VERSION_11
@@ -34,6 +37,7 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
+
 }
 
 dependencies {
@@ -56,4 +60,7 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+    implementation("com.squareup.moshi:moshi:1.15.1")
+    implementation("com.squareup.moshi:moshi-kotlin:1.15.1")
 }
